@@ -148,52 +148,50 @@ console.assert(reverse("we don't want no trouble") === "elbuort on tnaw t'nod ew
 //  * i.e. findLongestWord("book dogs") should return "book"
 //  */
 
+function wordLength(word){
+
+length=0;
+for (var i = 0; i < word.length; i++) {
+            
+if(65<=word.charCodeAt(i) && word.charCodeAt(i)<=90 
+                || 97<=word.charCodeAt(i) && word.charCodeAt(i)<=122 )
+            {
+                length++;
+            }
+
+            else{
+                continue;
+            }
+}
+
+return length;
+}
+
+
 function findLongestWord(sentence){
     
     var wordsArray=sentence.split(" ");
     
-    var flag=0;
+    
     var maxL=0;
     var maxW=0;
-
+    var l=0;
 // console.log(wordsArray);
 
     for(var i=0; i<wordsArray.length; i++)
     {
-    	flag=0;
-
-    	if(wordsArray[i].length>maxL)
+    	if((l=wordLength(wordsArray[i]))>maxL)
     	{
-    		for (var j = 0; j < wordsArray[i].length; j++) {
-    		
-    		if(65<=wordsArray[i].charCodeAt(j) && wordsArray[i].charCodeAt(j)<=90 
-    			|| 97<=wordsArray[i].charCodeAt(j) && wordsArray[i].charCodeAt(j)<=122 )
-    		{
-    			continue;
-    		}
-
-    	else{
-    		flag=1;
-    		
-    		}
-	}
-
-		
-		if (flag===0)
-		{
-		maxL=wordsArray[i].length
+		maxL=l;
 		maxW=wordsArray[i];
-		
 		}
 }
-
-    }
-
-
 
 return maxW;
 }
 
+// console.log(findLongestWord("book dogs"));
+// console.log(wordLength("dogs"));
 console.assert(findLongestWord("book dogs") === "book")
 console.assert(findLongestWord("don't mess with Texas") === "Texas")
 
